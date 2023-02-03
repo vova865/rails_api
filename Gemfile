@@ -27,6 +27,7 @@ gem 'grape-entity'
 gem 'redis', '~> 5.0'
 gem 'rest-client'
 gem 'sidekiq', '~> 6.5'
+gem 'telegram-bot'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

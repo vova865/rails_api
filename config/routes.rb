@@ -6,4 +6,6 @@ Rails.application.routes.draw do
   end
   mount Sidekiq::Web => '/sidekiq'
   mount Api => '/'
+  telegram_webhook TelegramWebhookController
+  # post '/webhooks/telegram_asdklhjzxcoiyasdjklfhlkjqwh12k4h312o34i' => 'webhooks#callback'
 end
