@@ -1,18 +1,25 @@
 class AccuWeatherClient
-  URL = 'http://dataservice.accuweather.com/currentconditions/v1/294021'.freeze
+  URL = 'http://dataservice.accuweather.com/currentconditions/v1/294021'
 
   def initialize
     @api_key = ENV['SECRET_KEY']
   end
 
-  def req
-    response = RestClient.get URL, { params: { apikey: @api_key } }
-    res = JSON.parse(response.body)
-    chat_id = '347032598'
-    t = res.first['Temperature']['Metric']['Value']
-    DataWeather.create(kind: 'current', temperature: t)
-    SendToTelegramWorker.perform_async(chat_id, t)
-    t
+  def call(param)
+    req(param)
+  end
+
+  private
+
+  def req(param)
+    new_url = URL + param if param
+    response = RestClient.get new_url, { params: { apikey: @api_key } }
+    JSON.parse(response.body)
+    # chat_id = '347032598'
+    # t = res.first['Temperature']['Metric']['Value']
+    # DataWeather.create(kind: 'current', temperature: t)
+    # SendToTelegramWorker.perform_async(chat_id, t)
+    # t
   end
 
 end
