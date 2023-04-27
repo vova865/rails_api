@@ -12,7 +12,7 @@ class AccuWeatherClient
   private
 
   def req(param)
-    new_url = URL + param if param
+    new_url = param ? URL + param : URL
     response = RestClient.get new_url, { params: { apikey: @api_key } }
     JSON.parse(response.body)
     # chat_id = '347032598'

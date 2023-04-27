@@ -5,6 +5,7 @@ class Weather < Grape::API
   namespace 'weather' do
     desc 'Current temperature'
     get 'current' do
+      param = nil
       response = AccuWeatherClient.new.call(param)
 
       present :temperature, response.first['Temperature']['Metric']['Value']
